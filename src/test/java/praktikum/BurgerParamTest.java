@@ -14,23 +14,23 @@ import static org.junit.Assert.assertEquals;
 public class BurgerParamTest {
 
     private final float bunPrice;
-    private final float ingredient1Price;
-    private final float ingredient2Price;
+    private final float ingredientSaucePrice;
+    private final float ingredientFillingPrice;
 
-    public BurgerParamTest(float bunPrice, float ingredient1Price, float ingredient2Price) {
+    public BurgerParamTest(float bunPrice, float ingredientSaucePrice, float ingredientFillingPrice) {
         this.bunPrice = bunPrice;
-        this.ingredient1Price = ingredient1Price;
-        this.ingredient2Price = ingredient2Price;
+        this.ingredientSaucePrice = ingredientSaucePrice;
+        this.ingredientFillingPrice = ingredientFillingPrice;
     }
 
     @Mock
     Bun bun;
 
     @Mock
-    Ingredient ingredient1;
+    Ingredient ingredientSauce;
 
     @Mock
-    Ingredient ingredient2;
+    Ingredient ingredientFilling;
 
     @Before
     public void init(){
@@ -55,16 +55,16 @@ public class BurgerParamTest {
         // Устанавливаем булочку для бургера
         burger.bun = bun;
         // Добавляем ингредиенты для бургера
-        burger.ingredients.add(ingredient1);
-        burger.ingredients.add(ingredient2);
+        burger.ingredients.add(ingredientSauce);
+        burger.ingredients.add(ingredientFilling);
 
         // Создаём стабы, возвращающие цену булочки и каждого ингредиента
         Mockito.when(bun.getPrice()).thenReturn(bunPrice);
-        Mockito.when(ingredient1.getPrice()).thenReturn(ingredient1Price);
-        Mockito.when(ingredient2.getPrice()).thenReturn(ingredient2Price);
+        Mockito.when(ingredientSauce.getPrice()).thenReturn(ingredientSaucePrice);
+        Mockito.when(ingredientFilling.getPrice()).thenReturn(ingredientFillingPrice);
 
         // Создаём ожидаемый результат
-        float expected = bunPrice * 2 + ingredient1Price + ingredient2Price;
+        float expected = bunPrice * 2 + ingredientSaucePrice + ingredientFillingPrice;
         // Фактический результат отражаем в переменной actual
         float actual = burger.getPrice();
         // Сверяем ожидаемый и фактический результаты
